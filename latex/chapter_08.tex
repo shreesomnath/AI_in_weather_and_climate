@@ -1,0 +1,105 @@
+\chapter{Fourier and 3D Transformers: FourCastNet and Pangu-Weather}
+
+The evolution of planetary-scale AI has been defined by a constant struggle between \textbf{Physical Fidelity} and \textbf{Computational Efficiency}. As we explored in Chapter 6, the Transformer architecture provides the "Global Vision" required to capture teleconnections, but its quadratic memory cost ($\mathcal{O}(N^2)$) creates an insurmountable wall at high resolutions. This chapter explores the two breakthrough architectures that have successfully breached this wall: \textbf{FourCastNet} and \textbf{Pangu-Weather}. We examine how FourCastNet leverages the mathematical elegance of the \textbf{Fourier Transform} to perform learning in the frequency domain, and how Pangu-Weather utilizes a hierarchical \textbf{3D Transformer} design to respect the volumetric nature of the Earth. By combining the "Spectral Wisdom" of the past with the "Neural Attention" of the future, these models have established a new ceiling for high-resolution global meteorology.
+
+\section{CS Foundation: The Neural Operator and Spectral Intelligence}
+
+Traditional neural networks are "Function Approximators" that map vectors to vectors. However, the atmosphere is a continuous fluid, and the physical laws that govern it (like the Navier-Stokes equations) are operators that map functions to functions. This distinction led to the emergence of the \textbf{Neural Operator}—a framework designed to learn the solution operator of a Partial Differential Equation (PDE) directly from data.
+
+The most successful implementation of this framework is the \textbf{Fourier Neural Operator (FNO)}. The conceptual origin of FNO is the realization that many complex fluid dynamics problems, which are notoriously difficult to solve in physical space, become elegantly simple when viewed through their spectral frequencies. According to the \textbf{Convolution Theorem}, the interaction of atmospheric waves can be computed as a point-wise multiplication in frequency space, providing a global receptive field at a fraction of the cost of self-attention.
+
+\section{CS Foundation: Adaptive Fourier Neural Operators (AFNO)}
+
+While FNOs are powerful, they struggle to scale to the massive resolution of global reanalysis grids. The \textbf{Adaptive Fourier Neural Operator (AFNO)}, developed by researchers at NVIDIA and Caltech, solves this by integrating token mixing into the spectral domain. 
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=1.5cm]
+    \node (in) [process] {Input Grid $X$};
+    \node (fft) [process, below of=in] {FFT (Spatial $\to$ Spectral)};
+    \node (mix) [decision, below of=fft, yshift=-0.5cm] {Block-Diagonal MLP};
+    \node (sparse) [process, below of=mix, yshift=-0.5cm] {Soft-Thresholding};
+    \node (ifft) [process, below of=sparse] {IFFT (Spectral $\to$ Spatial)};
+    \node (out) [startstop, below of=ifft] {Refined Grid $X'$};
+    
+    \draw [arrow] (in) -- (fft);
+    \draw [arrow] (fft) -- node[anchor=west] {Wavenumbers} (mix);
+    \draw [arrow] (mix) -- (sparse);
+    \draw [arrow] (sparse) -- (ifft);
+    \draw [arrow] (ifft) -- (out);
+\end{tikzpicture}
+\caption{The AFNO Spectral Mixing Process. By performing the non-linear interaction in the frequency domain, the model achieves a global receptive field with $O(N \log N)$ complexity.}
+\label{fig:afno_tikz}
+\end{figure}
+
+\subsection{Mathematical Derivation of the AFNO Layer}
+For an input atmospheric tensor $\mathbf{X} \in \mathbb{R}^{H \times W \times C}$, the AFNO layer executes a four-step process:
+
+\begin{enumerate}
+    \item \textbf{Spatial to Spectral Mapping}: The layer applies a 2D Real Fast Fourier Transform (RFFT) to project the data into the frequency domain:
+    \begin{equation}
+    \hat{\mathbf{X}} = \mathcal{F}(\mathbf{X}) \in \mathbb{C}^{H \times \frac{W}{2}+1 \times C}
+    \end{equation}
+    \item \textbf{Adaptive Spectral Mixing}: To reduce parameter count while maintaining capacity, AFNO uses a \textbf{Block-Diagonal MLP} to mix information across channels ($C$) for every frequency mode $k$:
+    \begin{equation}
+    \hat{\mathbf{X}}'_k = \sigma(\mathbf{W}_2 \cdot \text{GELU}(\mathbf{W}_1 \cdot \hat{\mathbf{X}}_k))
+    \end{equation}
+    where $\mathbf{W}_1$ and $\mathbf{W}_2$ are learned weight matrices.
+    \item \textbf{Soft-Thresholding (Shrinkage)}: To induce sparsity and filter out high-frequency numerical noise:
+    \begin{equation}
+    \hat{\mathbf{X}}''_k = \text{sign}(\hat{\mathbf{X}}'_k) \cdot \max(0, |\hat{\mathbf{X}}'_k| - \lambda)
+    \end{equation}
+    where $\lambda$ is a learned sparsity threshold.
+    \item \textbf{Inverse Mapping}: The refined coefficients are transformed back into the spatial domain:
+    \begin{equation}
+    \mathbf{X}_{out} = \mathcal{F}^{-1}(\hat{\mathbf{X}}'') + \text{Residual}(\mathbf{X})
+    \end{equation}
+\end{enumerate}
+
+\section{State of the Art: FourCastNet}
+
+\textbf{FourCastNet} (Kurth et al., 2022) was the first AI model to prove that a data-driven emulator could match the skill of the leading ECMWF IFS model at $0.25^\circ$ resolution. 
+
+\section{State of the Art: Pangu-Weather}
+
+\textbf{Pangu-Weather} (Bi et al., 2023) introduced a hierarchical \textbf{3D Earth-Specific Transformer} to address vertical asymmetries. The critical innovation is the \textbf{ESPB matrix}, which encodes absolute geographical location directly into the attention matrix:
+
+\begin{equation}
+\text{Attention}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) = \text{softmax}\left(\frac{\mathbf{Q}\mathbf{K}^T}{\sqrt{d}} + \mathbf{B}_{ESP}\right)\mathbf{V}
+\end{equation}
+
+\section{Interactive Lab: Building an AFNO Spectral Mixer}
+
+\begin{lstlisting}[language=Python, caption=Python Implementation of AFNO Token Mixing]
+import torch
+import torch.nn as nn
+import torch.fft
+
+class AFNOSpectralMixer(nn.Module):
+    def __init__(self, dim, num_blocks=8):
+        super().__init__()
+        self.num_blocks = num_blocks
+        self.w1 = nn.Parameter(0.02 * torch.randn(2, num_blocks, dim//num_blocks, dim//num_blocks))
+        self.w2 = nn.Parameter(0.02 * torch.randn(2, num_blocks, dim//num_blocks, dim//num_blocks))
+
+    def forward(self, x):
+        B, H, W, C = x.shape
+        x_hat = torch.fft.rfft2(x, dim=(1, 2), norm="ortho")
+        x_hat = x_hat.reshape(B, x_hat.shape[1], x_hat.shape[2], self.num_blocks, -1)
+        # Complex interaction (Simplified)
+        out_real = torch.relu(torch.einsum('bhwnc,nck->bhwnk', x_hat.real, self.w1[0]))
+        out_imag = torch.relu(torch.einsum('bhwnc,nck->bhwnk', x_hat.imag, self.w1[1]))
+        out = torch.complex(out_real, out_imag).reshape(B, H, -1, C)
+        return torch.fft.irfft2(out, s=(H, W), dim=(1, 2), norm="ortho")
+\end{lstlisting}
+
+\section{Summary: The Spectral-Attention Unification}
+
+FourCastNet and Pangu-Weather have successfully unified the spectral elegance of the 20th century with the neural attention of the 21st. We carry with us the lesson that \textbf{Architecture is a Physical Prior}—the success of these models is rooted in their respect for the scale of the planet.
+
+\section*{Bibliography}
+\begin{itemize}
+    \item Bi, K., et al. (2023). \textit{Accurate medium-range global weather forecasting with 3D neural networks}. Nature.
+    \item Guibas, S., et al. (2021). \textit{Adaptive Fourier Neural Operators}. arXiv.
+    \item Kurth, T., et al. (2022). \textit{FourCastNet: A Global Data-driven Weather Model}. arXiv.
+\end{itemize}

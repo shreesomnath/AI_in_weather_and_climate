@@ -1,0 +1,65 @@
+\documentclass[12pt, twoside, openright]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx}
+\usepackage{graphicx}
+\usepackage{amsmath, amssymb}
+\usepackage{hyperref}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{fancyhdr}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{natbib}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows, positioning, shadows}
+
+\tikzset{
+    startstop/.style={rectangle, rounded corners, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=red!30, drop shadow},
+    process/.style={rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=orange!30, drop shadow},
+    decision/.style={diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!30, drop shadow},
+    arrow/.style={thick,->,>=stealth}
+}
+
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstset{backgroundcolor=\color{backcolour}, basicstyle=\ttfamily\footnotesize, breaklines=true}
+\definecolor{boxbg}{RGB}{240, 248, 255}
+\usepackage{mdframed}
+\newmdenv[backgroundcolor=boxbg, linewidth=1pt, roundcorner=4pt, innertopmargin=10pt, innerbottommargin=10pt]{infobox}
+
+\newcommand{\dummygraphic}[1]{
+    \begin{mdframed}[backgroundcolor=gray!10]
+        \centering
+        \textit{[Placeholder for Figure: #1]}
+    \end{mdframed}
+}
+
+\begin{document}
+\frontmatter
+\title{\textbf{AI in Weather and Climate Science}}
+\author{Asst. Prof. Dr. Manmeet Singh\\Er. Somnath Luitel}
+\date{2026}
+\maketitle
+\tableofcontents
+
+\mainmatter
+\input{chapter_01}
+\input{chapter_02}
+\input{chapter_03}
+\input{chapter_04}
+\input{chapter_05}
+\input{chapter_06}
+\input{chapter_07}
+\input{chapter_08}
+\input{chapter_09}
+\input{chapter_10}
+\input{chapter_11}
+\input{chapter_12}
+\input{chapter_13}
+
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}
