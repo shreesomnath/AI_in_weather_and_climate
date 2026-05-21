@@ -33,17 +33,18 @@ This skill guides the creation of a comprehensive textbook on AI for Weather and
 
 ## Visual & Technical Standards
 
-- **Plots**: Use Python (Matplotlib/Seaborn) with colorblind-safe palettes (e.g., 'viridis' or 'magma').
-- **Flowcharts**: Use Mermaid.js for architectural diagrams.
-- **Algorithms**: Provide clean, documented Python/PyTorch pseudocode for core models.
-- **Citations**: Rigorous use of scientific citations for all SOTA findings and datasets.
+- **STEM Research**: All content must be derived from peer-reviewed journals (AMS, RMetS, IEEE, Nature/Science) and SOTA research papers.
+- **Iterative Review**: Every chapter must pass an internal "Reviewer Persona" check for technical gaps and pedagogical clarity before finalization.
+- **Typography**: Target output is Times New Roman, 12pt body, with specific heading sizes.
+- **Equations**: Use LaTeX for all block and inline formulas with full derivations where possible.
 
 ## Workflow
 
-1.  **Context Loading**: Read [REFERENCES.md](references/REFERENCES.md) for data schemas and SOTA paper lists.
-2.  **Expert Persona Application**: Consult [ANALOGIES.md](references/ANALOGIES.md) to explain physics and [CRITIQUE_PATTERNS.md](references/CRITIQUE_PATTERNS.md) to ensure scientific rigor.
-3.  **Cross-Domain Logic**: Use [LLM_TRANSFERABILITY.md](references/LLM_TRANSFERABILITY.md) to explain how modern AI architectures (Transformers/Tokens) map to the atmosphere.
-4.  **Onboarding**: Consult [PREREQUISITES.md](references/PREREQUISITES.md) when drafting the introductory sections or set-up guides.
-5.  **Lab Integration**: Use [PROJECT_BLUEPRINT.md](references/PROJECT_BLUEPRINT.md) when drafting "Operational Project" or "Case Study" sections.
-6.  **Drafting**: Generate content following linguistic constraints (no em-dashes, plain language).
-7.  **Audit**: Cross-reference drafts against [PEDAGOGICAL_GUIDE.md](references/PEDAGOGICAL_GUIDE.md) to ensure student accessibility.
+1.  **Literature Search**: Perform deep searches for SOTA papers and foundational journal articles related to the chapter topic.
+2.  **Rigor & Verification**: Follow [RIGOR_MANDATE.md](references/RIGOR_MANDATE.md) and [RESEARCH_REVIEW_MANDATE.md](references/RESEARCH_REVIEW_MANDATE.md). Perform multi-source searches for all technical claims. **Strictly prohibit the use of em-dashes (—).**
+3.  **The Deep Dive Mandate**: Strictly follow [PEDAGOGICAL_DEPTH.md](references/PEDAGOGICAL_DEPTH.md). Every technical concept must be explained through its origins, mathematical logic, real-world analogies, and AI implications. 
+4.  **Formatting Check**: Consult [FORMATTING_STANDARDS.md](references/FORMATTING_STANDARDS.md) for font sizes and LaTeX styles.
+5.  **Drafting (Initial Pass)**: Generate exhaustive paragraphs based on research.
+6.  **Internal Peer Review**: Switch to the Reviewer Persona. Identify gaps in physics, math, or pedagogy.
+7.  **Address & Finalize**: Rewrite the content to address the review comments. Produce the final manuscript.
+8.  **Audit**: Cross-reference drafts against [PEDAGOGICAL_GUIDE.md](references/PEDAGOGICAL_GUIDE.md).
