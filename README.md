@@ -1,11 +1,9 @@
-# AI in Weather and Climate Science
-## *Bridging Classical Physics and Artificial Intelligence*
+<div align="center">
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Academic-Textbook-blue" alt="Academic Textbook">
-  <img src="https://img.shields.io/badge/Field-Meteorology%20%26%20AI-green" alt="Meteorology and AI">
-  <img src="https://img.shields.io/badge/Level-Undergrad%20%2F%20Grad-orange" alt="Undergrad/Grad Level">
-</p>
+# 🌍 AI in Weather and Climate Science
+### *Bridging Numerical Weather Prediction and Deep Learning*
+
+<img src="textbook/front_matter/cover_page.png" width="500" alt="AI in Weather and Climate Science Book Cover">
 
 ---
 
@@ -18,39 +16,46 @@
 
 ---
 
-## **About This Textbook**
-This book serves as a comprehensive bridge between the century-long heritage of **Numerical Weather Prediction (NWP)** and the transformative era of **Artificial Intelligence (AI)**. Designed for both senior undergraduate and graduate students, it moves from the fundamental physics of the "Atmospheric Engine" to the deployment of state-of-the-art foundation models like *GraphCast* and *Pangu-Weather*.
+[![Status](https://img.shields.io/badge/Status-In%20Development-orange?style=for-the-badge)](#)
+[![Field](https://img.shields.io/badge/Field-Atmospheric%20AI-blue?style=for-the-badge)](#)
+[![Affiliation](https://img.shields.io/badge/University-WKU-red?style=for-the-badge)](#)
 
-### **Key Features**
-*   **Deep Pedagogical Scaffolding**: Concepts are introduced in plain language first, followed by rigorous mathematical formalization.
-*   **The "Deep Dive" Mandate**: Every technical concept is explored through its historical origin, physical logic, and real-world operational impact.
-*   **Operational Projects**: Includes a "Lab Manual" with practical Python (PyTorch/Xarray) projects for real-world operational forecasting.
-*   **Modern AI Logic**: Explores the transferability of Large Language Model (LLM) architectures, attention mechanisms, and scaling laws to Earth Science.
+</div>
 
----
+## 📖 About This Project
+This repository hosts the development of a comprehensive, high-quality textbook on the application of **Artificial Intelligence** in **Weather and Climate Science**. Designed for both undergraduate and graduate students, this book moves from the fundamental physical engines of the atmosphere to the cutting edge of **Earth System Foundation Models (ESFMs)**.
 
-## **Brief Table of Contents**
-1.  **The Atmospheric Engine**: Dynamics, Thermodynamics, and Chaos.
-2.  **Numerical Weather Prediction**: The History and Limits of the Grid.
-3.  **The Data Landscape**: Reanalysis, Satellites, and NetCDF Foundations.
-4.  **Neural Networks for Meteorologists**: Beyond Linear Regression.
+### 🌟 Key Pedagogical Pillars
+- **Computer Science Foundations**: Exhaustive explanations of Neural Networks, Graph Theory, and Attention Mechanisms from first principles.
+- **Physical Grounding**: From the Navier-Stokes equations and Thermodynamics to Chaos Theory.
+- **Data Mastery**: Deep dives into ERA5 Reanalysis, Satellite Radiances, and NetCDF/Zarr data structures.
+- **Architectural Excellence**: Understanding CNNs, LSTMs, Graph Neural Networks (GraphCast), and Transformers (Pangu-Weather).
+- **Operational Reality**: Real-world hardware insights, including GPU architectures, OOM sharding, and real-time inference serving.
+
+## 🗂️ Table of Contents
+1.  **The Atmospheric Engine**: Dynamics, Thermodynamics, and the Limits of Predictability.
+2.  **Numerical Weather Prediction**: The History, Discretization, and The Era of the Grid.
+3.  **The Data Landscape**: Observing the Earth from Space to Reanalysis.
+4.  **Neural Networks for Meteorologists**: The Computational Neuron and the Theory of Learning.
 5.  **Spatial & Temporal Patterns**: CNNs, LSTMs, and Atmospheric Geometry.
-6.  **The Transformer Revolution**: Attention Mechanisms in Earth Science.
-7.  **SOTA Models I**: Graph Neural Networks (GraphCast).
+6.  **The Transformer Revolution**: Scaled Dot-Product Attention and Foundation Models.
+7.  **SOTA Models I**: Graph Theory and Graph Neural Networks (GraphCast).
 8.  **SOTA Models II**: Fourier Operators and 3D Transformers.
-9.  **Generative AI**: Diffusion Models for Downscaling and Uncertainty.
-10. **The Operational Pipeline**: Ingestion, Inference, and Deployment.
-11. **Case Studies**: Hurricanes, Heatwaves, and Extreme Events.
-12. **Physics-Informed AI**: Toward Mass and Energy Conservation.
-13. **The Ethical Horizon**: AI for Global Climate Resilience.
+9.  **Generative AI**: Diffusion Models for Downscaling and Probabilistic Forecasts.
+10. **The Operational Pipeline**: Cloud-Native Ingestion and Real-time Inference.
+11. **Case Studies**: Hurricanes, Heatwaves, and Atmospheric Rivers.
+12. **Physics-Informed AI**: Toward Physical Consistency and Conservation.
+13. **The Ethical Horizon**: Democratization, Energy Paradox, and Climate Justice.
 
 ---
 
-## **Technical Standards**
-*   **Typography**: Times New Roman (12pt Justified).
-*   **Mathematics**: Formal LaTeX equations.
-*   **Visuals**: Mermaid.js flowcharts and Matplotlib scientific plots.
-*   **Citations**: Standard [Author, Year] format with per-chapter bibliographies.
+## 🛠️ Technical Standards
+- **Manuscript**: Written in professional, authoritative prose following academic publishing standards.
+- **Mathematics**: Fully formalized using LaTeX with step-by-step derivations.
+- **Typography**: Optimized for Times New Roman (12pt Justified).
+- **Research**: Sourced directly from peer-reviewed journals (Nature, Science, AMS, IEEE).
 
 ---
-*© 2026 Singh & Luitel. All rights reserved. Western Kentucky University.*
+<div align="center">
+  <i>© 2026 Singh & Luitel. All rights reserved. Western Kentucky University.</i>
+</div>
